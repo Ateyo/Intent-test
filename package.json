@@ -1,0 +1,38 @@
+{
+  "name": "tests-techniques",
+  "version": "0.1.0",
+  "description": "tests techniques backend intnet",
+  "type": "module",
+  "scripts": {
+    "start": "npx tsx watch src/server.ts",
+    "test": "npx tsx --enable-source-maps bin/test.ts",
+    "build": "tsc --project tsconfig.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@japa/api-client": "^2.0.3",
+    "@japa/expect": "^3.0.2",
+    "@japa/expect-type": "^2.0.2",
+    "@japa/runner": "^3.1.4",
+    "@tsconfig/node18": "^1.0.1",
+    "@types/express": "^5.0.0",
+    "@types/node": "^18.13.0",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.51.0",
+    "eslint": "^8.33.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-security": "^1.7.1",
+    "jest-mock": "^29.7.0",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "tsx": "^4.19.1",
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.0.2",
+    "body-parser": "^1.20.3",
+    "express": "^4.21.0"
+  }
+}
