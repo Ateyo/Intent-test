@@ -33,26 +33,28 @@ export class Database {
 
   /**
    * Récupère la liste de tous les utilisateurs
-   * // TODO trier par nom alphabetique
    */
   static async getUsers() {
-    return Array.from(this.users.values());
+    return Array.from(this.users.values()).sort((a, b) => a.lastName.localeCompare(b.lastName));
   }
 
   /**
    * Met à jour l'utilisateur avec les données envoyées
-   * // TODO: faire en sorte qu'on ne puisse pas modifier l'id d'un utilisateur
    */
-  static async updateUser(id: string, data: Partial<User>) {
+  static async updateUser(id: string, data: Partial<Omit<User, 'id'>>) {
     const user = this.users.get(id);
 
-    for (const key in data) {
-      // TODO régler ce problème de typage
-      user[key] = data[key];
+    if (!user) {
+      return null;
     }
 
+    Object.entries(data).forEach(([key, value]) => {
+      user[key as keyof Omit<User, 'id'>] = value;
+    });
+  
     return user;
   }
+
 
   static async searchByEmail(email: string) {
     // Simule un délai d'environ 2 secondes sur la database
@@ -61,6 +63,6 @@ export class Database {
     await delay(random(1, 2) * 1000);
 
     const users = await this.getUsers();
-    return users.find((user) => (user.email = email)) ?? null;
+    return users.find((user) => user.email === email) ?? null;
   }
 }
