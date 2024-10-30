@@ -42,8 +42,8 @@ app.patch(
 app.get(
   '/users/search',
   asyncHandler(async (req, res) => {
-    const e = req.query.email;
-    const u = Database.searchByEmail(e); // TODO régler ce probleme de typage
+    const e = req.query.email as string;
+    const u = Database.searchByEmail(e);
     res.json(u);
   }),
 );

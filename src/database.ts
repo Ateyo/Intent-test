@@ -46,11 +46,18 @@ export class Database {
   static async updateUser(id: string, data: Partial<User>) {
     const user = this.users.get(id);
 
-    for (const key in data) {
-      // TODO régler ce problème de typage
-      user[key] = data[key];
+    if (!user) {
+      throw new Error(`User with ID ${id} not found`);
     }
-
+    
+    Object.entries(data).forEach(([key, value]) => {
+      if (key === 'id') {
+        return;
+      } else {
+        user[key as keyof User] = value;
+      }
+    });
+  
     return user;
   }
 
