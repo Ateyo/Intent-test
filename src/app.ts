@@ -22,8 +22,12 @@ app.get(
     const id = req.params.id;
     const user = await Database.getUser(id);
 
-    // TODO faire en sorte qu'on ait une erreur 404 si l'utilisateur n'existe pas
-    res.json(user);
+    if (!user) {
+      res.status(404).send();
+      return;
+    } else {
+      res.json(user);
+    }
   }),
 );
 
@@ -34,8 +38,11 @@ app.patch(
     const data = req.body;
     const user = await Database.updateUser(id, data);
 
-    // TODO faire en sorte qu'on ait une erreur 404 si l'utilisateur n'existe pas
-    res.json(user);
+    if (!user) {
+      res.status(404).send("User with id:" + id + " not found");
+    } else {
+      res.json(user);
+    }
   }),
 );
 
