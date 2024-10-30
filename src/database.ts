@@ -63,6 +63,6 @@ export class Database {
     await delay(random(1, 2) * 1000);
 
     const users = await this.getUsers();
-    return users.find((user) => (user.email = email)) ?? null;
+    return users.find((user) => user.email === email) ?? null;
   }
 }

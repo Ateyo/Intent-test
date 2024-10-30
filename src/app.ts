@@ -50,7 +50,7 @@ app.get(
   '/users/search',
   asyncHandler(async (req, res) => {
     const e = req.query.email as string;
-    const u = Database.searchByEmail(e);
+    const u = await Database.searchByEmail(e);
     res.json(u);
   }),
 );
